@@ -25,11 +25,18 @@ Returns nothing, output is written to \emph{output_file}.
 Combine multiple png files into an animated png file.
 }
 \examples{
-png(filename="1.png", type="cairo-png")
+input1 <- tempfile(pattern = "", fileext = ".png")
+input2 <- tempfile(pattern = "", fileext = ".png")
+output <- tempfile(pattern = "", fileext = ".png")
+
+# Generate inputs.
+png(filename=input1)
 plot(1:40, (1:40)^2)
 dev.off()
-png(filename="2.png", type="cairo-png")
+png(filename=input2)
 plot(1:40, (-1*1:40)^3)
 dev.off()
-apng(c("1.png", "2.png"))
+
+# Create an animated png.
+apng(c(input1, input2), output)
 }
